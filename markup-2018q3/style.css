@@ -28,7 +28,9 @@ h2 span {
 
 header {
     height: 942px;
+
     color: #ffffff;
+
     background: linear-gradient(rgba(0,0,0,0.83), rgba(0,0,0,0.83)), url("img/header-background.jpg");
     background-size: cover;
 }
@@ -36,6 +38,7 @@ header {
 header h1 {
     position: relative;
     top: 260px;
+
     font-size: 7.2rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -44,36 +47,44 @@ header h1 {
 header p {
     position: relative;
     top: 226px;
-    font-size: 3.2rem;
-    font-family: "Georgia", serif;
+
     font-style: italic;
+    font-size: 3.2rem;
     line-height: 47px;
+    font-family: "Georgia", serif;
 }
 
 header .logo {
     position: absolute;
     top: 38px;
+
     display: block;
 }
 
 .top-panel {
     position: relative;
     left: 12.5%;
+
     width: 75%;
 }
 
 nav {
     position: relative;
+
     width: 100%;
+
     text-align: right;
+
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 nav a {
     display: inline-block;
-    padding: 3.4% 0 3.35%;
     margin: 0 35px;
+    padding: 3.4% 0 3.35%;
+
     font-size: 1.6rem;
+
     border-bottom: 1px solid rgba(255, 255, 255, 0);
 
     -webkit-user-select: none;
@@ -95,41 +106,51 @@ nav a:hover {
 section.member {
     width: 100%;
     height: 100px;
+
     background-color: #000000;
 }
 .member div.login {
     position: relative;
-    float:left;
     left: -15px;
+    z-index: 2;
+
     display: inline-block;
+    float:left;
     width: 50%;
     height: 100%;
-    border-left: 10px solid transparent;
+
     background-color: rgba(33,66,74,0.91);
-    z-index: 2;
+    border-left: 10px solid transparent;
+
     transform: skew(-15deg, 0deg);
 }
 
 .member div.register {
     position: relative;
+    z-index: 1;
+
     width: 100%;
     height: 100%;
+
     background-color: rgba(47,172,108,0.91);
-    z-index: 1;
+
 }
 
 .member a {
     position: relative;
     top: 36px;
+    z-index: 3;
+
     display: inline-block;
     width: 6.25%;
     height: auto;
-    text-align: center;
+
+
     font-size: 2.2rem;
     font-weight: bold;
-    color: #ffffff;
+    text-align: center;
     text-transform: uppercase;
-    z-index: 3;
+    color: #ffffff;
 }
 
 .member a.login {
@@ -148,6 +169,7 @@ section.member {
 
 section.domain {
     position: relative;
+
     width: 100%;
     height: 540px;
 }
@@ -155,6 +177,7 @@ section.domain {
 div.domain {
     position: relative;
     left: 12.5%;
+
     width: 75%;
 }
 
@@ -162,7 +185,9 @@ div.domain h3 {
     position: relative;
     top: 58px;
     left: 10%;
+
     width: 80%;
+
     font-size: 2.4rem;
     font-weight: 800;
     color: #383737;
@@ -171,19 +196,23 @@ div.domain h3 {
 div.domain p {
     position: relative;
     top: 58px;
+
     font-size: 1.6rem;
-    font-family: "Montserrat", sans-serif;
     font-weight: 300;
+    font-family: "Montserrat", sans-serif;
     color: #a2a2a2;
 }
 
 div.domain table {
     position: relative;
     left: 10%;
+
     width: 80%;
+
     font-family: "Lato", "Open Sans", sans-serif;
     text-align: center;
     color: #cbcbcb;
+
     border-collapse: collapse;
 }
 
@@ -193,7 +222,9 @@ table.domain, table.prices, td {
 
 table.domain {
     top: 90px;
+
     height: 50px;
+
     font-size: 1.6rem;
 }
 
@@ -203,23 +234,26 @@ td.data1 {
 
 td.data2 {
     width: 82%;
-    text-align: left;
     padding: 10px;
+
+    text-align: left;
 }
 
 .domain input {
     width: 740px;
-    border: none;
+
     font-size: 1.5rem;
-    color: #868686;
     font-weight: 600;
+    color: #868686;
+
+    border: none;
 }
 
 .domain select {
-    border: none;
     font-size: 1.6rem;
     color: #cbcbcb;
-    -webkit-appearance: scrollbarbutton-left;
+
+    border: none;
 }
 
 td.data3 {
@@ -230,11 +264,13 @@ td.data1::before, td.data2::before {
     content: "";
     position: absolute;
     left: 0.1%;
+
     display: block;
     width: 99.9%;
     height: 8px;
-    padding: 0;
     margin: 0;
+    padding: 0;
+
     background-color: #ffffff;
 }
 
@@ -248,7 +284,9 @@ td.data2::before {
 
 table.prices {
     top: 132px;
+
     height: 180px;
+
     font-size: 1.4rem;
     text-transform: capitalize;
 }
@@ -263,11 +301,13 @@ td.elem1::before {
     position: absolute;
     top: 1px;
     left: 0.1%;
+
     display: block;
     width: 94.2%;
     height: 146px;
-    padding: 0;
     margin: 0;
+    padding: 0;
+
     background-color: transparent;
     border-width: 16px 26px;
     border-style: solid;
@@ -278,11 +318,13 @@ td.elem2::before, td.elem3::before, td.elem4::before {
     content: "";
     position: absolute;
     top: 84px;
+
     display: block;
     width: 1.3%;
     height: 12px;
-    padding: 0;
     margin: 0;
+    padding: 0;
+
     background-color: #ffffff;
 }
 
@@ -309,18 +351,22 @@ div.packages {
     position: relative;
     top: -282px;
     left: 12.5%;
+
     width: 75%;
     height: 665px;
     padding: 0;
+
     border-bottom: 2px dotted #d4d4d4;
 }
 
 .package {
     position: relative;
+
     float: left;
     width: 21.25%;
     height: 558px;
     margin-right: 5%;
+
     background-color: #ffffff;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.06);
 }
@@ -335,9 +381,9 @@ i.icon {
 }
 
 .package h4 {
-    text-align: center;
     font-size: 1.6rem;
     font-weight: bold;
+    text-align: center;
     text-transform: uppercase;
 }
 
@@ -355,9 +401,11 @@ i.icon {
     position: relative;
     top: 8px;
     left: 36.86%;
+
     display: block;
     width: 50px;
     height: 50px;
+
     border-radius: 50%;
 }
 
@@ -373,13 +421,15 @@ i.icon {
 
 .package .package-description {
     position: relative;
-    clear: both;
+
     display: inline-block;
+    clear: both;
     width: 78.43%;
     height: 280px;
     overflow: auto;
     margin: 0;
     padding: 3.5% 0;
+
     border-top: 1px solid #dfdfdf;
     border-bottom: 1px solid #dfdfdf;
 }
@@ -392,23 +442,29 @@ i.icon {
 
 ul.characters {
     position: relative;
-    float: left;
+
     display: inline-block;
+    float: left;
     width: 75%;
-    padding: 0;
     margin: 0;
+    padding: 0;
+
     text-align: left;
+
     list-style-type: none;
 }
 
 ul.values {
     position: relative;
-    float: left;
+
     display: inline-block;
+    float: left;
     width: 25%;
-    padding: 0;
     margin: 0;
+    padding: 0;
+
     text-align: right;
+
     list-style-type: none;
 }
 
@@ -452,6 +508,7 @@ ul.values li {
 
 .basic p.icon {
     color: #f9d423;
+
     border: 6px solid #f9d423;
 }
 
@@ -465,6 +522,7 @@ ul.values li {
 
 .normal p.icon {
     color: #7f8c8d;
+
     border: 6px solid #7f8c8d;
 }
 
@@ -478,6 +536,7 @@ ul.values li {
 
 .big p.icon {
     color: #f85f40;
+
     border: 6px solid #f85f40;
 }
 
@@ -491,12 +550,14 @@ ul.values li {
 
 .biggest p.icon {
     color: #1abc9c;
+
     border: 6px solid #1abc9c;
 }
 
 .packages-background {
     width: 100%;
     height: 380px;
+
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
                 repeating-linear-gradient(
                     135deg,
@@ -505,8 +566,8 @@ ul.values li {
                     rgba(62,62,62,0.44) 2px,
                     rgba(62,62,62,0.44) 4px),
                 url("img/packages-background.jpg");
-    background-size: cover;
     background-position-y: 40%;
+    background-size: cover;
 }
 
 /******************** ABOUT ********************/
@@ -518,14 +579,17 @@ section.about {
 
 div.about {
     position: relative;
-    float: left;
     top: -60px;
     left: 12.5%;
+
     display: inline-block;
+    float: left;
     width: 28%;
     height: 180px;
     padding-right: 6%;
+
     text-align: left;
+
     border-right: 2px dotted #d4d4d4;
 }
 
@@ -539,6 +603,7 @@ div.about p {
     width: 100%;
     margin: 0;
     padding: 0;
+
     font-size: 1.8rem;
     font-weight: 300;
     color: #747474;
@@ -548,6 +613,7 @@ div.figures {
     position: relative;
     top: -70px;
     left: 5.8%;
+
     display: inline-block;
     width: 38%;
     height: 180px;
@@ -555,12 +621,14 @@ div.figures {
 
 div.figures figure {
     position: relative;
+
     float: left;
 }
 
 section.about figcaption p.name {
     margin: 5px;
     padding: 0;
+
     font-size: 1.7rem;
     font-weight: 600;
     color: #303030;
@@ -569,6 +637,7 @@ section.about figcaption p.name {
 section.about figcaption p.job {
     margin: 5px;
     padding: 0;
+
     font-size: 1.5rem;
     font-weight: 400;
     color: #8e8e8e;
@@ -576,6 +645,7 @@ section.about figcaption p.job {
 
 section.about figcaption a {
     margin: 5% 10px;
+
     color: #8e8e8e;
 }
 
@@ -584,8 +654,8 @@ section.about figcaption a:hover {
 }
 
 div.figures figure img {
-    border-radius: 50%;
     border: 5px solid rgba(0,0,0,0.1);
+    border-radius: 50%;
 }
 
 /******************** COMMENTS ********************/
@@ -594,6 +664,7 @@ div.figures figure img {
     display: inline-block;
     width: 55.625%;
     height: 47px;
+
     font-size: 2rem;
     color: #ffffff;
 }
@@ -601,18 +672,21 @@ div.figures figure img {
 .comments p:first-child {
     position: relative;
     top: 38px;
+
     font-weight: 300;
 }
 
 .comments p:last-child {
     position: relative;
     top: 15px;
+
     font-weight: 700;
 }
 
 .comments {
     width: 100%;
     height: 190px;
+
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
                 repeating-linear-gradient(
                     135deg,
@@ -621,8 +695,8 @@ div.figures figure img {
                     rgba(84,84,84,0.44) 1.5px,
                     rgba(84,84,84,0.44) 6px),
                 url("img/comments-background.jpg");
-    background-size: cover;
     background-position-y: 70%;
+    background-size: cover;
 }
 
 /******************** FUNCTIONS ********************/
@@ -635,9 +709,10 @@ section.functions {
 
 div.function {
     position: relative;
-    float: left;
     top: 80px;
     left: 12.5%;
+
+    float: left;
     width: 230px;
     height: 140px;
     margin-right: 75px;
@@ -654,18 +729,21 @@ div.function h4 {
 
 div.function p {
     font-size: 1.6rem;
-    color: #7e7e7e;
     line-height: 137.5%;
+    color: #7e7e7e;
 }
 
 div.function a {
     position: relative;
     left: 80px;
+
     display: block;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+
     color: #ffffff;
+
+    border-radius: 50%;
 }
 
 .fast-servers a {
@@ -691,25 +769,29 @@ div.function a:hover {
 /******************** FOOTER ********************/
 
 footer {
+    clear: both;
     width: 100%;
     height: 295px;
+
     background-color: #2a2a2a;
-    clear: both;
 }
 
 footer .nav1 {
     font-size: 1.3rem;
     text-align: right;
     text-transform: uppercase;
+
     border-bottom: 1px solid #4a4a4a;
+
     list-style-type: none;
 }
 
 footer .nav1 li {
     display: inline-block;
     margin: 32px 23px 33px;
-    color: #686868;
+
     font-weight: 500;
+    color: #686868;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -728,40 +810,47 @@ footer .nav1 li:hover {
 footer .logo {
     position: absolute;
     top: 23px;
+
     display: block;
+
     filter: contrast(10%);
 }
 
 footer .copyright {
     position: relative;
-    float: left;
     left: 12.5%;
     top: 18px;
+
     display: table-column;
+    float: left;
     width: 20%;
     height: 150px;
     margin: 0;
     padding-right: 5%;
-    border-right: 1px solid #4a4a4a;
+
     text-align: left;
+
+    border-right: 1px solid #4a4a4a;
 }
 
 footer div > p {
-    color: #686868;
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 173%;
+    color: #686868;
 }
 
 footer .contacts a {
     position: relative;
+
     display: inline-block;
     margin: 0;
     padding: 0;
-    color: #686868;
+
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 173%;
+    color: #686868;
     text-decoration: none;
 }
 
@@ -771,28 +860,33 @@ footer .copyright span {
 
 footer .nav2 {
     position: relative;
-    float: left;
-    left: 12%;
     top: 18px;
+    left: 12%;
+
     display: table-row;
     table-layout: fixed;
+    float: left;
     width: 24%;
     height: 150px;
     margin: 0;
     padding: 0 2.5%;
+
     border-right: 1px solid #4a4a4a;
 }
 
 footer .nav2 ul {
     float: left;
     width: 38%;
+
     text-align: left;
+
     list-style-type: none;
 }
 
 footer .nav2 li {
     position: relative;
     left: 0;
+
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 173%;
@@ -815,13 +909,15 @@ footer .nav2 a:hover {
 
 footer .contacts {
     position: relative;
-    float: left;
     left: 13%;
     top: 28px;
+
+    float: left;
     width: 15%;
     height: 150px;
     margin: 0;
     padding-left: 75px;
+
     text-align: left;
 }
 
@@ -833,6 +929,7 @@ footer .contacts a span {
 footer .contacts a {
     position: relative;
     top: 10%;
+    
     margin: 0;
 }
 
