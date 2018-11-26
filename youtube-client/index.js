@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.createElement('form');
   const searchInput = document.createElement('input');
   const searchButton = document.createElement('button');
+  const cache = [];
 
   document.body.appendChild(main);
   main.appendChild(searchSection);
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showResults(result) {
     for (let i = 0; i < 4; i += 1) {
+      cache.shift();
       const clipTitle = result.items[i].snippet.title;
       const clipLink = `https://www.youtube.com/watch?v=${result.items[i].id.videoId}`;
       const clipPreview = result.items[i].snippet.thumbnails.high.url;
@@ -59,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
     xhp.onreadystatechange = () => {
       if (xhp.readyState === 4 && xhp.status === 200) {
         const result = JSON.parse(xhp.responseText);
+        for (let i = 0; i < 15; i += 1) {
+          cache.push(result.items[i]);
+        }
         resultsSection.innerHTML = '';
         showResults(result);
       }
