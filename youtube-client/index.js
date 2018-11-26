@@ -18,6 +18,38 @@ document.addEventListener('DOMContentLoaded', () => {
   searchButton.setAttribute('type', 'submit');
   searchButton.innerText = 'Submit';
 
+  function showResults(result) {
+    for (let i = 0; i < 4; i += 1) {
+      const clipTitle = result.items[i].snippet.title;
+      const clipLink = `https://www.youtube.com/watch?v=${result.items[i].id.videoId}`;
+      const clipPreview = result.items[i].snippet.thumbnails.high.url;
+      const clipDescription = result.items[i].snippet.description;
+      const author = result.items[i].snippet.channelTitle;
+      const publicationDate = result.items[i].snippet.publishedAt;
+
+      const resultArticle = document.createElement('article');
+      resultArticle.setAttribute('class', `result res${i + 1}`);
+      resultsSection.appendChild(resultArticle);
+      const clipPreviewEl = document.createElement('img');
+      clipPreviewEl.setAttribute('src', clipPreview);
+      resultArticle.appendChild(clipPreviewEl);
+      const titleEl = document.createElement('a');
+      titleEl.innerText = clipTitle;
+      titleEl.setAttribute('href', clipLink);
+      titleEl.setAttribute('alt', clipTitle);
+      resultArticle.appendChild(titleEl);
+      const descriptionEl = document.createElement('p');
+      descriptionEl.innerText = clipDescription;
+      resultArticle.appendChild(descriptionEl);
+      const channelEl = document.createElement('p');
+      channelEl.innerText = author;
+      resultArticle.appendChild(channelEl);
+      const dateEl = document.createElement('p');
+      dateEl.innerText = publicationDate;
+      resultArticle.appendChild(dateEl);
+    }
+  }
+
   function makeRequest(e) {
     e.preventDefault();
     const searchValue = searchInput.value;
@@ -26,8 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
     xhp.open('GET', url, true);
     xhp.onreadystatechange = () => {
       if (xhp.readyState === 4 && xhp.status === 200) {
-        const info = JSON.parse(xhp.responseText);
+        const result = JSON.parse(xhp.responseText);
         resultsSection.innerHTML = '';
+        showResults(result);
       }
     };
     xhp.send();
