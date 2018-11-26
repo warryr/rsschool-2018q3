@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const carouselSection = document.createElement('section');
   const searchForm = document.createElement('form');
   const searchInput = document.createElement('input');
-  const searchButton = document.createElement('button');
   const cache = [];
 
   document.body.appendChild(main);
@@ -14,10 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   main.appendChild(carouselSection);
   searchSection.appendChild(searchForm);
   searchForm.appendChild(searchInput);
-  searchForm.appendChild(searchButton);
   searchInput.setAttribute('type', 'text');
-  searchButton.setAttribute('type', 'submit');
-  searchButton.innerText = 'Submit';
 
   function showResults(result) {
     for (let i = 0; i < 4; i += 1) {
@@ -71,5 +67,5 @@ document.addEventListener('DOMContentLoaded', () => {
     xhp.send();
   }
 
-  searchButton.addEventListener('click', makeRequest);
+  searchInput.addEventListener('input', makeRequest);
 });
