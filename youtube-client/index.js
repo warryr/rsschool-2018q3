@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const carouselSection = document.createElement('section');
   const searchForm = document.createElement('form');
   const searchInput = document.createElement('input');
-  const cache = [];
+  const storage = [];
 
   document.body.appendChild(main);
   main.appendChild(searchSection);
@@ -15,15 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
   searchForm.appendChild(searchInput);
   searchInput.setAttribute('type', 'text');
 
-  function showResults(result) {
+  function showResults() {
     for (let i = 0; i < 4; i += 1) {
-      cache.shift();
-      const clipTitle = result.items[i].snippet.title;
-      const clipLink = `https://www.youtube.com/watch?v=${result.items[i].id.videoId}`;
-      const clipPreview = result.items[i].snippet.thumbnails.high.url;
-      const clipDescription = result.items[i].snippet.description;
-      const author = result.items[i].snippet.channelTitle;
-      const publicationDate = result.items[i].snippet.publishedAt;
+      const clipTitle = storage[i].snippet.title;
+      const clipLink = `https://www.youtube.com/watch?v=${storage[i].id.videoId}`;
+      const clipPreview = storage[i].snippet.thumbnails.high.url;
+      const clipDescription = storage[i].snippet.description;
+      const author = storage[i].snippet.channelTitle;
+      const publicationDate = storage[i].snippet.publishedAt;
 
       const resultArticle = document.createElement('article');
       resultArticle.setAttribute('class', `result res${i + 1}`);
@@ -58,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (xhp.readyState === 4 && xhp.status === 200) {
         const result = JSON.parse(xhp.responseText);
         for (let i = 0; i < 15; i += 1) {
-          cache.push(result.items[i]);
+          storage.push(result.items[i]);
         }
         resultsSection.innerHTML = '';
         showResults(result);
