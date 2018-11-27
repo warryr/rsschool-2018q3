@@ -101,6 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsSection.innerHTML = '';
   }
 
+  document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+      case 'ArrowRight': {
+        showNext();
+        break;
+      }
+      case 'ArrowLeft': {
+        showPrev();
+        break;
+      }
+      default: break;
+    }
+  });
+
   searchInput.addEventListener('input', () => {
     const searchValue = searchInput.value;
     clearResults();
