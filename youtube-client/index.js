@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.createElement('form');
   const searchInput = document.createElement('input');
   const storage = [];
+  let count = 0;
+  const pageSize = 4;
+  let nextPageToken;
 
   document.body.appendChild(main);
   main.appendChild(searchSection);
@@ -17,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showResults() {
     resultsSection.innerHTML = '';
-    for (let i = 0; i < 4; i += 1) {
+    for (let i = count; i < count + pageSize; i += 1) {
       const clipTitle = storage[i].snippet.title;
       const clipLink = `https://www.youtube.com/watch?v=${storage[i].id.videoId}`;
       const clipPreview = storage[i].snippet.thumbnails.high.url;
@@ -26,42 +29,71 @@ document.addEventListener('DOMContentLoaded', () => {
       const publicationDate = storage[i].snippet.publishedAt;
 
       const resultArticle = document.createElement('article');
-      resultArticle.setAttribute('class', `result res${i + 1}`);
+      resultArticle.classList.add(`res${i + 1}`);
       resultsSection.appendChild(resultArticle);
       const clipPreviewEl = document.createElement('img');
       clipPreviewEl.setAttribute('src', clipPreview);
+      clipPreviewEl.style.width = '80px';
+      clipPreviewEl.style.height = '80px';
       resultArticle.appendChild(clipPreviewEl);
       const titleEl = document.createElement('a');
-      titleEl.innerText = clipTitle;
+      titleEl.textContent = clipTitle;
       titleEl.setAttribute('href', clipLink);
       titleEl.setAttribute('alt', clipTitle);
       resultArticle.appendChild(titleEl);
       const descriptionEl = document.createElement('p');
-      descriptionEl.innerText = clipDescription;
+      descriptionEl.textContent = clipDescription;
       resultArticle.appendChild(descriptionEl);
       const channelEl = document.createElement('p');
-      channelEl.innerText = author;
+      channelEl.textContent = author;
       resultArticle.appendChild(channelEl);
       const dateEl = document.createElement('p');
-      dateEl.innerText = publicationDate;
+      dateEl.textContent = publicationDate;
       resultArticle.appendChild(dateEl);
     }
   }
 
-  function makeRequest(searchValue) {
-    const url = `https://www.googleapis.com/youtube/v3/search?type=video&q=${searchValue}&part=snippet&maxResults=15&key=AIzaSyCmcP7pWB1HDWy2Z5PqmF4bWj4FmkSsPQM`;
+  function makeRequest(searchValue, url) {
     const xhp = new XMLHttpRequest();
     xhp.open('GET', url, true);
     xhp.onreadystatechange = () => {
       if (xhp.readyState === 4 && xhp.status === 200) {
         const result = JSON.parse(xhp.responseText);
+        nextPageToken = result.nextPageToken;
         for (let i = 0; i < 15; i += 1) {
           storage.push(result.items[i]);
         }
-        showResults(result);
+        showResults();
       }
     };
     xhp.send();
+  }
+
+  function firstRequest(searchValue) {
+    const url = `https://www.googleapis.com/youtube/v3/search?type=video&q=${searchValue}&part=snippet&maxResults=15&key=AIzaSyCmcP7pWB1HDWy2Z5PqmF4bWj4FmkSsPQM`;
+    makeRequest(searchValue, url);
+  }
+
+  function nextPagesRequest(searchValue) {
+    const url = `https://www.googleapis.com/youtube/v3/search?pageToken=${nextPageToken}&type=video&q=${searchValue}&part=snippet&maxResults=15&key=AIzaSyCmcP7pWB1HDWy2Z5PqmF4bWj4FmkSsPQM`;
+    makeRequest(searchValue, url);
+  }
+
+  function showNext() {
+    const searchValue = searchInput.value;
+    count += pageSize;
+    if (storage.length < pageSize + count) {
+      nextPagesRequest(searchValue);
+    } else {
+      showResults();
+    }
+  }
+
+  function showPrev() {
+    if (count !== 0) {
+      count -= pageSize;
+      showResults();
+    }
   }
 
   function clearResults() {
@@ -73,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchValue = searchInput.value;
     clearResults();
     if (searchValue !== '') {
-      makeRequest(searchValue);
+      firstRequest(searchValue);
     }
   });
 });
