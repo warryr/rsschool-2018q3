@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   searchInput.setAttribute('type', 'text');
 
   function showResults() {
+    resultsSection.innerHTML = '';
     for (let i = 0; i < 4; i += 1) {
       const clipTitle = storage[i].snippet.title;
       const clipLink = `https://www.youtube.com/watch?v=${storage[i].id.videoId}`;
@@ -47,9 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function makeRequest(e) {
-    e.preventDefault();
-    const searchValue = searchInput.value;
+  function makeRequest(searchValue) {
     const url = `https://www.googleapis.com/youtube/v3/search?type=video&q=${searchValue}&part=snippet&maxResults=15&key=AIzaSyCmcP7pWB1HDWy2Z5PqmF4bWj4FmkSsPQM`;
     const xhp = new XMLHttpRequest();
     xhp.open('GET', url, true);
@@ -59,12 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 15; i += 1) {
           storage.push(result.items[i]);
         }
-        resultsSection.innerHTML = '';
         showResults(result);
       }
     };
     xhp.send();
   }
 
-  searchInput.addEventListener('input', makeRequest);
+  function clearResults() {
+    storage.length = 0;
+    resultsSection.innerHTML = '';
+  }
+
+  searchInput.addEventListener('input', () => {
+    const searchValue = searchInput.value;
+    clearResults();
+    if (searchValue !== '') {
+      makeRequest(searchValue);
+    }
+  });
 });
