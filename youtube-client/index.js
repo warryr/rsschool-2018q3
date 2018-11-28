@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
   let nextPageTok;
 
-  const setPageSize = () => {
+  function setPageSize() {
     pageSize = parseInt(window.innerWidth / 310, 10);
     if (pageSize > 4) {
       pageSize = 4;
     }
-  };
+  }
   setPageSize();
 
   document.body.appendChild(main);
