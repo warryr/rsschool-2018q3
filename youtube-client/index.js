@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
   searchForm.appendChild(searchInput);
   searchInput.setAttribute('type', 'text');
 
+  function setArticleStyle(article) {
+    article.style.display = 'inline-block';
+    article.style.width = '300px';
+    article.style.height = '500px';
+    article.style.boxSizing = 'border-box';
+    article.style.padding = '20px';
+  }
+
   function showResults() {
     resultsSection.innerHTML = '';
     for (let i = count; i < count + pageSize; i += 1) {
@@ -31,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const resultArticle = document.createElement('article');
       resultArticle.classList.add(`res${i + 1}`);
       resultsSection.appendChild(resultArticle);
+      setArticleStyle(resultArticle);
       const clipPreviewEl = document.createElement('img');
       clipPreviewEl.setAttribute('src', clipPreview);
       clipPreviewEl.style.width = '80px';
