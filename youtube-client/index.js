@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttons = [];
   let count = 0;
   let pageSize;
+  let currentPage = 1;
   let nextPageTok;
 
   const setPageSize = () => {
@@ -44,9 +45,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function switchPage() {
+    currentPage = parseInt(count / pageSize + 1, 10);
+    if (currentPage === 1) {
+      buttons[0].textContent = '1';
+      buttons[0].setAttribute('disabled', '');
+      buttons[1].removeAttribute('disabled', '');
+      buttons[2].removeAttribute('disabled', '');
+    }
+    if (currentPage === 2) {
+      buttons[1].textContent = '2';
+      buttons[0].removeAttribute('disabled', '');
+      buttons[1].setAttribute('disabled', '');
+      buttons[2].removeAttribute('disabled', '');
+    }
+    if (currentPage > 2) {
+      buttons[2].textContent = `${currentPage}`;
+      buttons[0].removeAttribute('disabled', '');
+      buttons[1].removeAttribute('disabled', '');
+      buttons[2].setAttribute('disabled', '');
+    }
+  }
+
   function showResults() {
     resultsSection.innerHTML = '';
     clearPageNumbers();
+    switchPage();
     for (let i = count; i < count + pageSize; i += 1) {
       console.log(`count = ${count}`);
       const clipTitle = storage[i].snippet.title;
@@ -147,6 +171,150 @@ document.addEventListener('DOMContentLoaded', () => {
       navSection.appendChild(navButton);
       buttons.push(navButton);
     }
+
+    buttons[0].addEventListener('mouseup', () => {
+      switch (currentPage) {
+        case 2: {
+          showPrev(1);
+          break;
+        }
+        default: {
+          showPrev(2);
+          break;
+        }
+      }
+    });
+
+    buttons[0].addEventListener('mousedown', () => {
+      switch (currentPage) {
+        case 2: {
+          buttons[0].textContent = `${currentPage - 1}`;
+          break;
+        }
+        default: {
+          buttons[0].textContent = `${currentPage - 2}`;
+          break;
+        }
+      }
+    });
+
+    buttons[1].addEventListener('mouseup', () => {
+      switch (currentPage) {
+        case 1: {
+          showNext(1);
+          break;
+        }
+        default: {
+          showPrev(1);
+          break;
+        }
+      }
+    });
+
+    buttons[1].addEventListener('mousedown', () => {
+      switch (currentPage) {
+        case 1: {
+          buttons[1].textContent = `${currentPage + 1}`;
+          break;
+        }
+        default: {
+          buttons[1].textContent = `${currentPage - 1}`;
+          break;
+        }
+      }
+    });
+
+    buttons[2].addEventListener('mouseup', () => {
+      switch (currentPage) {
+        case 1: {
+          showNext(2);
+          break;
+        }
+        case 2: {
+          showNext(1);
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+
+    buttons[2].addEventListener('mousedown', () => {
+      switch (currentPage) {
+        case 1: {
+          buttons[2].textContent = `${currentPage + 2}`;
+          break;
+        }
+        case 2: {
+          buttons[2].textContent = `${currentPage + 1}`;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+
+    buttons[3].addEventListener('mouseup', () => {
+      switch (currentPage) {
+        case 1: {
+          showNext(3);
+          break;
+        }
+        case 2: {
+          showNext(2);
+          break;
+        }
+        default: {
+          showNext(1);
+          break;
+        }
+      }
+    });
+
+    buttons[3].addEventListener('mousedown', () => {
+      switch (currentPage) {
+        case 1: {
+          buttons[3].textContent = `${currentPage + 3}`;
+          break;
+        }
+        case 2: {
+          buttons[3].textContent = `${currentPage + 2}`;
+          break;
+        }
+        default: {
+          buttons[3].textContent = `${currentPage + 1}`;
+          break;
+        }
+      }
+    });
+
+    buttons[4].addEventListener('mouseup', () => {
+      switch (currentPage) {
+        case 1: {
+          showNext(4);
+          break;
+        }
+        default: {
+          showNext(2);
+          break;
+        }
+      }
+    });
+
+    buttons[4].addEventListener('mousedown', () => {
+      switch (currentPage) {
+        case 1: {
+          buttons[4].textContent = `${currentPage + 4}`;
+          break;
+        }
+        default: {
+          buttons[4].textContent = `${currentPage + 2}`;
+          break;
+        }
+      }
+    });
   }
 
   window.addEventListener('resize', () => {
@@ -164,8 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showPrev(1);
         break;
       }
-      default:
-        break;
+      default: break;
     }
   });
 
