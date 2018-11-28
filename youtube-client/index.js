@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.createElement('input');
   const storage = [];
   let count = 0;
-  const pageSize = 4;
-  let nextPageToken;
+  let pageSize = 4;
+  let nextPageTok;
 
   document.body.appendChild(main);
   main.appendChild(searchSection);
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const publicationDate = storage[i].snippet.publishedAt;
 
       const resultArticle = document.createElement('article');
-      resultArticle.classList.add(`res${i + 1}`);
+      resultArticle.classList.add('result');
       resultsSection.appendChild(resultArticle);
       setArticleStyle(resultArticle);
       const clipPreviewEl = document.createElement('img');
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     xhp.onreadystatechange = () => {
       if (xhp.readyState === 4 && xhp.status === 200) {
         const result = JSON.parse(xhp.responseText);
-        nextPageToken = result.nextPageToken;
+        nextPageTok = result.nextPageToken;
         for (let i = 0; i < 15; i += 1) {
           storage.push(result.items[i]);
         }
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function nextPagesRequest(searchValue) {
-    const url = `https://www.googleapis.com/youtube/v3/search?pageToken=${nextPageToken}&type=video&q=${searchValue}&part=snippet&maxResults=15&key=AIzaSyCmcP7pWB1HDWy2Z5PqmF4bWj4FmkSsPQM`;
+    const url = `https://www.googleapis.com/youtube/v3/search?pageToken=${nextPageTok}&type=video&q=${searchValue}&part=snippet&maxResults=15&key=AIzaSyCmcP7pWB1HDWy2Z5PqmF4bWj4FmkSsPQM`;
     makeRequest(searchValue, url);
   }
 
@@ -100,7 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showPrev() {
     if (count !== 0) {
-      count -= pageSize;
+      if (count < pageSize) {
+        count = 0;
+      } else {
+        count -= pageSize;
+      }
       showResults();
     }
   }
@@ -109,6 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
     storage.length = 0;
     resultsSection.innerHTML = '';
   }
+
+  window.addEventListener('resize', () => {
+    pageSize = parseInt(window.innerWidth / 310, 10);
+    if (pageSize > 4) {
+      pageSize = 4;
+    }
+    showResults();
+  });
 
   document.addEventListener('keydown', (e) => {
     switch (e.key) {
