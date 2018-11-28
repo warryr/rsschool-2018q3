@@ -2,21 +2,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const main = document.createElement('main');
   const searchSection = document.createElement('section');
   const resultsSection = document.createElement('section');
-  const carouselSection = document.createElement('section');
+  const navSection = document.createElement('section');
   const searchForm = document.createElement('form');
   const searchInput = document.createElement('input');
   const storage = [];
+  const buttons = [];
   let count = 0;
-  let pageSize = 4;
+  let pageSize;
   let nextPageTok;
+
+  const setPageSize = () => {
+    pageSize = parseInt(window.innerWidth / 310, 10);
+    if (pageSize > 4) {
+      pageSize = 4;
+    }
+  };
+  setPageSize();
 
   document.body.appendChild(main);
   main.appendChild(searchSection);
   main.appendChild(resultsSection);
-  main.appendChild(carouselSection);
+  main.appendChild(navSection);
   searchSection.appendChild(searchForm);
   searchForm.appendChild(searchInput);
   searchInput.setAttribute('type', 'text');
+
+  navSection.style.position = 'fixed';
+  navSection.style.top = '600px';
 
   function setArticleStyle(article) {
     article.style.display = 'inline-block';
@@ -26,9 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
     article.style.padding = '20px';
   }
 
+  function clearPageNumbers() {
+    for (let i = 0; i < 5; i += 1) {
+      buttons[i].textContent = '';
+    }
+  }
+
   function showResults() {
     resultsSection.innerHTML = '';
+    clearPageNumbers();
     for (let i = count; i < count + pageSize; i += 1) {
+      console.log(`count = ${count}`);
       const clipTitle = storage[i].snippet.title;
       const clipLink = `https://www.youtube.com/watch?v=${storage[i].id.videoId}`;
       const clipPreview = storage[i].snippet.thumbnails.high.url;
@@ -37,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const publicationDate = storage[i].snippet.publishedAt;
 
       const resultArticle = document.createElement('article');
-      resultArticle.classList.add('result');
       resultsSection.appendChild(resultArticle);
       setArticleStyle(resultArticle);
       const clipPreviewEl = document.createElement('img');
@@ -88,22 +107,24 @@ document.addEventListener('DOMContentLoaded', () => {
     makeRequest(searchValue, url);
   }
 
-  function showNext() {
+  function showNext(k) {
     const searchValue = searchInput.value;
-    count += pageSize;
-    if (storage.length < pageSize + count) {
+    clearPageNumbers();
+    count += pageSize * k;
+    if (storage.length < pageSize * k + count) {
       nextPagesRequest(searchValue);
     } else {
       showResults();
     }
   }
 
-  function showPrev() {
+  function showPrev(k) {
     if (count !== 0) {
-      if (count < pageSize) {
+      clearPageNumbers();
+      if (count < pageSize * k) {
         count = 0;
       } else {
-        count -= pageSize;
+        count -= pageSize * k;
       }
       showResults();
     }
@@ -111,28 +132,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function clearResults() {
     storage.length = 0;
+    buttons.length = 0;
     resultsSection.innerHTML = '';
+    navSection.innerHTML = '';
+  }
+
+  function addButtons() {
+    for (let i = 0; i < 5; i += 1) {
+      const navButton = document.createElement('button');
+      navButton.style.borderRadius = '50%';
+      navButton.style.width = '30px';
+      navButton.style.height = '30px';
+      navButton.style.margin = '10px';
+      navSection.appendChild(navButton);
+      buttons.push(navButton);
+    }
   }
 
   window.addEventListener('resize', () => {
-    pageSize = parseInt(window.innerWidth / 310, 10);
-    if (pageSize > 4) {
-      pageSize = 4;
-    }
+    setPageSize();
     showResults();
   });
 
   document.addEventListener('keydown', (e) => {
     switch (e.key) {
       case 'ArrowRight': {
-        showNext();
+        showNext(1);
         break;
       }
       case 'ArrowLeft': {
-        showPrev();
+        showPrev(1);
         break;
       }
-      default: break;
+      default:
+        break;
     }
   });
 
@@ -140,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchValue = searchInput.value;
     clearResults();
     if (searchValue !== '') {
+      addButtons();
       firstRequest(searchValue);
     }
   });
