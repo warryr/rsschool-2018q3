@@ -340,6 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchValue = searchInput.value;
     clearResults();
     if (searchValue !== '') {
+      count = 0;
       addButtons();
       firstRequest(searchValue);
     }
