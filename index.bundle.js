@@ -127,8 +127,11 @@ document.addEventListener('DOMContentLoaded', function () {
   searchForm.appendChild(searchInput);
   searchInput.setAttribute('type', 'text');
 
+  resultsSection.style.position = 'relative';
+  resultsSection.style.top = '100px';
+
   navSection.style.position = 'fixed';
-  navSection.style.top = '600px';
+  navSection.style.top = '60px';
 
   (0, _setPageSize.setPageSize)();
 
